@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input ke Google Sheets</title>
+</head>
+<body>
+    <h1>Input Nilai ke Google Sheets</h1>
+    <form id="inputForm">
+        <label for="nilai">Masukkan Nilai:</label>
+        <input type="text" id="nilai" name="nilai" required>
+        <button type="submit">Kirim</button>
+    </form>
+
+    <script>
+        const scriptURL = 'URL_GOOGLE_APPS_SCRIPT'; // Ganti dengan URL Google Apps Script
+        const form = document.getElementById('inputForm');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nilai = document.getElementById('nilai').value;
+
+            fetch(scriptURL, {
+                method: 'POST',
+                body: JSON.stringify({ nilai: nilai }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => alert('Nilai berhasil dikirim!'))
+            .catch(error => alert('Terjadi kesalahan: ' + error.message));
+        });
+    </script>
+</body>
+</html>
